@@ -30,8 +30,13 @@ namespace KspDevModePatcher
                 MoveInitializerIntoAwake(asm, "AtmosphereFromGround", "\u0004", 8, "Start");
                 MoveInitializerIntoAwake(asm, "AtmosphereFromGround", "\u0005", 8, "Start");
                 MoveInitializerIntoAwake(asm, "AtmosphereFromGround", "\u0006", 8, "Start");
-                MoveInitializerIntoAwake(asm, "AtmosphereFromGround", "\u0007", 8, "Start");
-                MoveInitializerIntoAwake(asm, "AtmosphereFromGround", "\u0008", 8, "Start");
+                MoveInitializerIntoAwake(asm, "AtmosphereFromGround", "\a", 8, "Start");
+                MoveInitializerIntoAwake(asm, "AtmosphereFromGround", "\b", 8, "Start");
+                MoveInitializerIntoAwake(asm, "AtmosphereFromGround", "\t", 8, "Start");
+
+                MoveInitializerIntoAwake(asm, "FlightIntegrator", "sunLayerMask", 24, "Start");
+
+                MoveInitializerIntoAwake(asm, "GameSettings", "INPUT_DEVICES", 2, "Awake");
 
                 MoveInitializerIntoAwake(asm, "HighLogic", "\u0019", 8, "Awake");
                 MoveInitializerIntoAwake(asm, "HighLogic", "\u001A", 8, "Awake");
@@ -39,33 +44,31 @@ namespace KspDevModePatcher
                 MoveInitializerIntoAwake(asm, "HighLogic", "\u001C", 8, "Awake");
                 MoveInitializerIntoAwake(asm, "HighLogic", "\u001D", 8, "Awake");
 
-                //MoveInitializerIntoAwake(asm, "MapView", "\r", 8, "Awake");
+                MoveInitializerIntoAwake(asm, "MapView", "\r", 8, "Start");
 
-                MoveInitializerIntoAwake(asm, "ModuleAblator", "\u0004\b", 8, "Start");
+                MoveInitializerIntoAwake(asm, "ModuleAblator", "\b\b", 8, "Start");
 
-                MoveInitializerIntoAwake(asm, "PhysicsGlobals", "\u0013\u0002", 8, "Awake");
+                MoveInitializerIntoAwake(asm, "PhysicsGlobals", "\u001d\u0002", 8, "Awake");
 
                 MoveInitializerIntoAwake(asm, "PQSMod_MaterialQuadRelative", "\u001e\u0002", 8, "Awake");
                 MoveInitializerIntoAwake(asm, "PQSMod_MaterialQuadRelative", "\u001f\u0002", 8, "Awake");
                 MoveInitializerIntoAwake(asm, "PQSMod_MaterialQuadRelative", " \u0002", 8, "Awake");
 
-                MoveInitializerIntoAwake(asm, "PQSMod_OceanFX", "\u000A\u0003", 8, "Awake");
-                MoveInitializerIntoAwake(asm, "PQSMod_OceanFX", "\u000B\u0003", 8, "Awake");
-                MoveInitializerIntoAwake(asm, "PQSMod_OceanFX", "\u000C\u0003", 8, "Awake");
-                MoveInitializerIntoAwake(asm, "PQSMod_OceanFX", "\u000D\u0003", 8, "Awake");
+                MoveInitializerIntoAwake(asm, "PQSMod_OceanFX", "\n\u0003", 8, "Awake");
+                MoveInitializerIntoAwake(asm, "PQSMod_OceanFX", "\v\u0003", 8, "Awake");
+                MoveInitializerIntoAwake(asm, "PQSMod_OceanFX", "\f\u0003", 8, "Awake");
+                MoveInitializerIntoAwake(asm, "PQSMod_OceanFX", "\r\u0003", 8, "Awake");
 
                 MoveInitializerIntoAwake(asm, "SkySphereControl", "\u0002", 8, "Start");
                 MoveInitializerIntoAwake(asm, "SkySphereControl", "\u0003", 8, "Start");
                 MoveInitializerIntoAwake(asm, "SkySphereControl", "\u0004", 8, "Start");
 
-                MoveInitializerIntoAwake(asm, "SunShaderController", "\u0008", 8, "Start");
-                MoveInitializerIntoAwake(asm, "SunShaderController", "\u0009", 8, "Start");
-                MoveInitializerIntoAwake(asm, "SunShaderController", "\u000A", 8, "Start");
-                MoveInitializerIntoAwake(asm, "SunShaderController", "\u000B", 8, "Start");
+                MoveInitializerIntoAwake(asm, "SunShaderController", "\b", 8, "Start");
+                MoveInitializerIntoAwake(asm, "SunShaderController", "\t", 8, "Start");
+                MoveInitializerIntoAwake(asm, "SunShaderController", "\n", 8, "Start");
+                MoveInitializerIntoAwake(asm, "SunShaderController", "\v", 8, "Start");
 
-                MoveInitializerIntoAwake(asm, "GameSettings", "INPUT_DEVICES", 2, "Awake");
-
-                MoveInitializerIntoAwake(asm, "FlightIntegrator", "sunLayerMask", 24, "Start");
+                MoveInitializerIntoAwake(asm, "UnderwaterTint", "colorID", 8, "Awake");
 
                 /*var m = asm.MainModule.GetType("GameSettings").Methods.First(x => x.Name == "Awake");
                 log.Debug("{0}", m);
@@ -107,7 +110,8 @@ namespace KspDevModePatcher
             }
             if (!toMove.Any())
             {
-                throw new Exception(String.Format("No initializer instruction found for {0}. Is the file already patched?", field));
+                log.Error(String.Format("No initializer instruction found for {0}. Is the file already patched?", field));
+                return;
             }
 
             toMove.ForEach(x => initializerFn.Body.Instructions.Remove(x));
