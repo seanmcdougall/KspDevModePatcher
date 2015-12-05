@@ -38,11 +38,11 @@ namespace KspDevModePatcher
 
                 MoveInitializerIntoAwake(asm, "GameSettings", "INPUT_DEVICES", 2, "Awake");
 
-                MoveInitializerIntoAwake(asm, "HighLogic", "\u0019", 8, "Awake");
-                MoveInitializerIntoAwake(asm, "HighLogic", "\u001A", 8, "Awake");
-                MoveInitializerIntoAwake(asm, "HighLogic", "\u001B", 8, "Awake");
-                MoveInitializerIntoAwake(asm, "HighLogic", "\u001C", 8, "Awake");
-                MoveInitializerIntoAwake(asm, "HighLogic", "\u001D", 8, "Awake");
+                MoveInitializerIntoAwake(asm, "HighLogic", "\u0004", 8, "Awake");
+                MoveInitializerIntoAwake(asm, "HighLogic", "\u0005", 8, "Awake");
+                MoveInitializerIntoAwake(asm, "HighLogic", "\u0006", 8, "Awake");
+                MoveInitializerIntoAwake(asm, "HighLogic", "\u0007", 8, "Awake");
+                MoveInitializerIntoAwake(asm, "HighLogic", "\u0008", 8, "Awake");
 
                 MoveInitializerIntoAwake(asm, "MapView", "\r", 8, "Start");
 
